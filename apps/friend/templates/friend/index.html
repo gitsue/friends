@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Friends</title>
+</head>
+<body>
+	<div id="container">
+		<div id="header">
+			<h1>Hello, {{curr_user.first.alias}}!</h1>
+			<p>Here is the list of your friends:</p>
+			<a href="{% url 'users:logout' %}">Log Out</a>
+			<table>
+				<thead>
+					<tr>
+						<th>Alias</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% if friendlist %}
+						{% for friend in friendlist %}
+						<tr>
+							<td>{{friend.friend.name}}</td>
+							<td><a href="{% url 'friend:profilepage' friend.friend.id %}">View Profile</a></td>
+							<td><a href="{% url 'friend:removefriend' friend.id %}">Remove as Friend</a></td>
+						</tr>
+						{% endfor %}
+					{% elif friendedme %}
+						{% for friend in friendedme %}
+						<tr>
+							<td>{{friend.user.name}}</td>
+							<td><a href="{% url 'friend:profilepage' friend.user.id %}">View Profile</a></td>
+							<td><a href="{% url 'friend:removefriend' friend.user.id %}">Remove as Friend</a></td>
+						</tr>
+						{% endfor %}						
+					{% else %}
+						<p>You don't have friends yet...</p>
+					{% endif %}
+				</tbody>
+			</table>
+		</div>
+		<div id="sitecontent">
+			<p>Other Users not on your friend's list:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Alias</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for user in other_users %}
+					<tr>
+						<td><a href="{% url 'friend:profilepage' user.id %}">{{user.name}}</a></td>
+						<td><a href="{% url 'friend:addfriend' user.id %}">Add as Friend</a></td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

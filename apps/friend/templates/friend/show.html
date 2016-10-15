@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{user.first.alias}}</title>
+</head>
+<body>
+	<div id="container">
+		<div id="header">
+			<a href="{% url 'friend:index' %}">Home</a>
+			<a href="{% url 'users:logout' %}">Log Out</a>
+		</div>
+		<div id="sitecontent">
+			<h1>{{user.first.alias}}'s Profile</h1>
+			<p>Name: {{user.first.name}}</p>
+			<p>Email Address: {{user.first.email}}</p>
+		</div>
+	</div>
+</body>
+</html>

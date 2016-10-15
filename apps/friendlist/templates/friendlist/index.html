@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Friends</title>
+</head>
+<body>
+	<div id="container">
+		<div id="header">
+			<h1>Hello, {{curr_user.first.alias}}!</h1>
+			<p>Here is the list of your friends:</p>
+			<a href="{% url 'users:logout' %}">Log Out</a>
+			<table>
+				<thead>
+					<tr>
+						<th>Alias</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+					{% for friend in friendlist %}
+						<td>{{friend.id}}</td>
+					{% endfor %}
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div id="sitecontent">
+			<p>Other Users not on your friend's list:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Alias</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for user in other_users %}
+					<tr>
+						<td>{{user.name}}</td>
+						<td><a href="{% url 'friendlist:addfriend' user.id %}">Add as Friend</a></td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

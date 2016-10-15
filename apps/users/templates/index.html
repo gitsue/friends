@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login/Registration</title>
+</head>
+<body>
+	<div id="container">
+		<div id="header">
+			<h1>Welcome!</h1>
+		</div>
+		<div id="sitecontent">
+			<h4>Register</h4>
+			{% if messages %}
+			{% for message in messages %}
+			<p>{{message}}</p>
+			{% endfor %}
+			{% endif %}
+			<form action="{% url 'users:register' %}" method="post">
+				{% csrf_token %}
+				Name:<input type="text" name="name">
+				Alias:<input type="text" name="alias">
+				Email:<input type="text" name="email">
+				Password:<input type="password" name="password">
+				Confirm Pw:<input type="password" name="confirmpw">
+				Date of Birth:<input type="date" name="date">
+				<input type="submit" value="Register">
+			</form>
+			<h4>Login</h4>
+			<form action="{% url 'users:login' %}" method="post">
+				{% csrf_token %}
+				Email:<input type="text" name="email">
+				Password:<input type="password" name="password">
+				<input type="submit" value="Login">
+			</form>
+		</div>
+	</div>
+</body>
+</html>
